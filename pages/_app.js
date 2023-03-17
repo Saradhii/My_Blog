@@ -1,10 +1,11 @@
 import config from "@config/config.json";
 import theme from "@config/theme.json";
-import { JsonContext } from "context/state";
+// import { JsonContext } from "context/state";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import TagManager from "react-gtm-module";
 import "styles/style.scss";
+
 
 const App = ({ Component, pageProps }) => {
   // import google font css
@@ -25,13 +26,15 @@ const App = ({ Component, pageProps }) => {
   };
   useEffect(() => {
     setTimeout(() => {
-      config.params.tag_manager_id && TagManager.initialize(tagManagerArgs);
+      process.env.NODE_ENV === "production" &&
+        config.params.tag_manager_id &&
+        TagManager.initialize(tagManagerArgs);
     }, 5000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <JsonContext>
+    <>
       <Head>
         {/* google font css */}
         <link
@@ -50,8 +53,8 @@ const App = ({ Component, pageProps }) => {
           content="width=device-width, initial-scale=1, maximum-scale=5"
         />
       </Head>
-      <Component {...pageProps} />
-    </JsonContext>
+        <Component {...pageProps} />
+    </>
   );
 };
 

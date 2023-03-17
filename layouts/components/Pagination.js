@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 
-const Pagination = ({ section, currentPage, totalPages }) => {
+const Pagination = ({ currentPage, totalPages }) => {
   const indexPageLink = currentPage === 2;
   const hasPrevPage = currentPage > 1;
   const hasNextPage = totalPages > currentPage;
@@ -15,18 +15,14 @@ const Pagination = ({ section, currentPage, totalPages }) => {
     <>
       {totalPages > 1 && (
         <nav
-          className="mb-4 flex justify-center space-x-4"
+          className="mb-4 flex justify-center -space-x-px"
           aria-label="Pagination"
         >
           {/* previous */}
           {hasPrevPage ? (
             <Link
-              href={
-                indexPageLink
-                  ? `${section ? "/" + section : "/"}`
-                  : `${section ? "/" + section : ""}/page/${currentPage - 1}`
-              }
-              className="rounded-lg border border-primary px-2 py-2 text-dark"
+              href={indexPageLink ? "/" : `/page/${currentPage - 1}`}
+              className="border border-primary px-2 py-2 text-text"
             >
               <>
                 <span className="sr-only">Previous</span>
@@ -46,7 +42,7 @@ const Pagination = ({ section, currentPage, totalPages }) => {
               </>
             </Link>
           ) : (
-            <span className="rounded-lg border border-primary px-2 py-2 text-dark">
+            <span className="border border-primary px-2 py-2 text-text">
               <>
                 <span className="sr-only">Previous</span>
                 <svg
@@ -72,20 +68,16 @@ const Pagination = ({ section, currentPage, totalPages }) => {
               {pagination === currentPage ? (
                 <span
                   aria-current="page"
-                  className={`rounded-lg border border-primary bg-primary px-4 py-2 text-white`}
+                  className={`border border-primary bg-primary px-4 py-2 text-white`}
                 >
                   {pagination}
                 </span>
               ) : (
                 <Link
-                  href={
-                    i === 0
-                      ? `${section ? "/" + section : "/"}`
-                      : `${section ? "/" + section : ""}/page/${pagination}`
-                  }
+                  href={i === 0 ? `${"/"}` : `/page/${pagination}`}
                   passHref
                   aria-current="page"
-                  className={`rounded-lg border border-primary px-4 py-2 text-dark`}
+                  className={`border border-primary px-4 py-2 text-text`}
                 >
                   {pagination}
                 </Link>
@@ -96,8 +88,8 @@ const Pagination = ({ section, currentPage, totalPages }) => {
           {/* next page */}
           {hasNextPage ? (
             <Link
-              href={`${section ? "/" + section : ""}/page/${currentPage + 1}`}
-              className="rounded-lg border border-primary px-2 py-2 text-dark"
+              href={`/page/${currentPage + 1}`}
+              className="border border-primary px-2 py-2 text-text"
             >
               <>
                 <span className="sr-only">Next</span>
@@ -117,7 +109,7 @@ const Pagination = ({ section, currentPage, totalPages }) => {
               </>
             </Link>
           ) : (
-            <span className="rounded-lg border border-primary px-2 py-2 text-dark">
+            <span className="border border-primary px-2 py-2 text-text">
               <>
                 <span className="sr-only">Next</span>
                 <svg

@@ -1,29 +1,37 @@
 {
   "site": {
-    "title": "Bookworm Next | Personal Blog Theme",
+    "title": "Hydrogen Nextjs",
     "base_url": "/",
-    "favicon": "/images/favicon.png",
-    "logo": "/images/logo.png",
-    "logo_width": "200",
-    "logo_height": "34",
-    "logo_text": "Bookworm Light"
+    "favicon": "/images/developer.png"
   },
 
   "settings": {
-    "pagination": 3,
+    "pagination": 6,
     "summary_length": 200,
     "blog_folder": "posts"
   },
 
+  "profile": {
+    "name": "Michael Caine",
+    "image": "/images/developer.png",
+    "designation": "Front-end developer",
+    "bio": "A Full Stack Front-end Developer based in New York. Meticulous web developer with over 2 years of front end experience and passion for responsive and mobile-first website design."
+  },
+
   "params": {
-    "tag_manager_id": "",
     "contact_form_action": "#",
-    "copyright": "Copyright © 2022 a theme by [themefisher](https://themefisher.com)"
+    "tag_manager_id": "",
+    "copyright": "Copyright © 2022 a theme by [statichunt](https://statichunt.com)"
   },
 
   "metadata": {
-    "meta_author": "Themefisher",
-    "meta_image": "/images/og-image.png",
-    "meta_description": "Next Boilerplate"
+    "meta_author": "Statichunt",
+    "meta_image": "",
+    "meta_description": ""
+  },
+
+  "disqus": {
+    "enable": true,
+    "shortname": "themefisher-template"
   }
 }

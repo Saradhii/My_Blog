@@ -1,26 +1,39 @@
 import Pagination from "@components/Pagination";
 import config from "@config/config.json";
-import Base from "@layouts/Baseof";
+import Post from "@layouts/components/Post";
 import { getSinglePage } from "@lib/contentParser";
-import Posts from "@partials/Posts";
+import { sortByDate } from "@lib/utils/sortFunctions";
 const { blog_folder } = config.settings;
 
 // blog pagination
-const BlogPagination = ({ posts, authors, currentPage, pagination }) => {
+const BlogPagination = ({ posts, currentPage, pagination }) => {
   const indexOfLastPost = currentPage * pagination;
   const indexOfFirstPost = indexOfLastPost - pagination;
   const totalPages = Math.ceil(posts.length / pagination);
-  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+
+  const currentPosts = sortByDate(
+    posts.slice(indexOfFirstPost, indexOfLastPost)
+  );
 
   return (
-    <Base>
-      <section className="section">
-        <div className="container">
-          <Posts className="mb-16" posts={currentPosts} authors={authors} />
-          <Pagination totalPages={totalPages} currentPage={currentPage} />
+    <div className="section container">
+      <div className="row">
+        <div className="mx-auto lg:col-10">
+          <div className="row">
+            {currentPosts.map((post, i) => (
+              <Post
+                className="col-12 mb-6 sm:col-6"
+                key={"key-" + i}
+                post={post}
+              />
+            ))}
+          </div>
         </div>
-      </section>
-    </Base>
+      </div>
+      <div className="mt-12">
+        <Pagination totalPages={totalPages} currentPage={currentPage} />
+      </div>
+    </div>
   );
 };
 
@@ -53,13 +66,11 @@ export const getStaticProps = async ({ params }) => {
   const currentPage = parseInt((params && params.slug) || 1);
   const { pagination } = config.settings;
   const posts = getSinglePage(`content/${blog_folder}`);
-  const authors = getSinglePage("content/authors");
 
   return {
     props: {
       pagination: pagination,
       posts: posts,
-      authors: authors,
       currentPage: currentPage,
     },
   };
